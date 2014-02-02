@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 
 
 def send_mail(host=None, port=None, login=None, password=None, sender=None,
-              to=None,subject=None, text=None, html=None, debuglevel=2):
+              to=None,subject=None, text=None, html=None, tls=None, debuglevel=2):
     """ Send email """
 
     # Compose mail headers
@@ -25,9 +25,12 @@ def send_mail(host=None, port=None, login=None, password=None, sender=None,
     smtp = SMTP()
     smtp.set_debuglevel(debuglevel)
     smtp.connect(host, port)
-    smtp.ehlo()
-    smtp.starttls()
-    smtp.ehlo()
+    if tls:
+        print tls
+        print "Start tls"
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.ehlo()
     smtp.login(login, password)
 
     try:
@@ -49,7 +52,11 @@ parser.add_argument("--to", required=False, default="jane.doe@example.org", help
 parser.add_argument("--subject", required=True, help="Email subject")
 parser.add_argument("--text", required=True, help="Email body (plain text)")
 parser.add_argument("--html", required=False, default="", help="Email body (html)")
+# parser.add_argument("--tls", required=False, type=bool, default=True, help="Use TLS")
+parser.add_argument('--tls',dest='tls',action='store_true', help="Use TLS")
+parser.add_argument('--no-tls',dest='tls',action='store_false', help="Not use TLS")
 parser.add_argument("--debuglevel", required=False, type=int, default=0)
+parser.set_defaults(tls=True)
 
 args = parser.parse_args()
 kwargs = args.__dict__
