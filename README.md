@@ -9,7 +9,7 @@ Usage:
 ```
 usage: mail.py [-h] [--host HOST] [--port PORT] --login LOGIN --password
                PASSWORD [--sender SENDER] [--to TO] --subject SUBJECT --text
-               TEXT [--html HTML] [--debuglevel DEBUGLEVEL]
+               TEXT [--html HTML] [--tls] [--no-tls] [--debuglevel DEBUGLEVEL]
 
 Send email throw specified SMTP server.
 
@@ -24,7 +24,10 @@ optional arguments:
   --subject SUBJECT     Email subject (default: None)
   --text TEXT           Email body (plain text) (default: None)
   --html HTML           Email body (html) (default: )
+  --tls                 Use TLS (default: True)
+  --no-tls              Not use TLS (default: True)
   --debuglevel DEBUGLEVEL
+                        Debug level (default: 0)
 ```
 
 Usage example:

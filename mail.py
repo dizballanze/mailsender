@@ -54,7 +54,7 @@ parser.add_argument("--text", required=True, help="Email body (plain text)")
 parser.add_argument("--html", required=False, default="", help="Email body (html)")
 parser.add_argument('--tls',dest='tls',action='store_true', help="Use TLS")
 parser.add_argument('--no-tls',dest='tls',action='store_false', help="Not use TLS")
-parser.add_argument("--debuglevel", required=False, type=int, default=0)
+parser.add_argument("--debuglevel", required=False, type=int, default=0, help="Debug level")
 parser.set_defaults(tls=True)
 
 args = parser.parse_args()
