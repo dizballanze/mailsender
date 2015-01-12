@@ -1,11 +1,14 @@
 import argparse
+from os.path import basename
 from smtplib import SMTP
+from email.MIMEBase import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email import Encoders
 
 
 def send_mail(host=None, port=None, login=None, password=None, sender=None,
-              to=None,subject=None, text=None, html=None, tls=None, debuglevel=2):
+              to=None,subject=None, text=None, html=None, tls=None, debuglevel=2, attachments=None):
     """ Send email """
 
     # Compose mail headers
@@ -21,23 +24,29 @@ def send_mail(host=None, port=None, login=None, password=None, sender=None,
         html_part = MIMEText(html, 'html')
         msg.attach(html_part)
 
+    # Append attachments
+    for attach in attachments or []:
+        with open(attach, "rb") as attached_file:
+            part = MIMEBase('application', "octet-stream")
+            part.set_payload(attached_file.read())
+            Encoders.encode_base64(part)
+            part.add_header('Content-Disposition', 'attachment; filename="%s"' % basename(attach))
+            msg.attach(part)
+
     # Connect and authenticate
     smtp = SMTP()
     smtp.set_debuglevel(debuglevel)
     smtp.connect(host, port)
     if tls:
-        print tls
-        print "Start tls"
         smtp.ehlo()
         smtp.starttls()
         smtp.ehlo()
     smtp.login(login, password)
 
     try:
-    	smtp.sendmail(sender, to, msg.as_string())
+        smtp.sendmail(sender, to, msg.as_string())
     finally:
-    	smtp.close()
-        print "Done."
+        smtp.close()
 
 
 parser = argparse.ArgumentParser(
@@ -55,6 +64,7 @@ parser.add_argument("--html", required=False, default="", help="Email body (html
 parser.add_argument('--tls',dest='tls',action='store_true', help="Use TLS")
 parser.add_argument('--no-tls',dest='tls',action='store_false', help="Not use TLS")
 parser.add_argument("--debuglevel", required=False, type=int, default=0, help="Debug level")
+parser.add_argument("--attachments", required=False, action='append', help="One or few files to attach")
 parser.set_defaults(tls=True)
 
 args = parser.parse_args()
