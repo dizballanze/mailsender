@@ -10,6 +10,7 @@ Usage:
 usage: mail.py [-h] [--host HOST] [--port PORT] --login LOGIN --password
                PASSWORD [--sender SENDER] [--to TO] --subject SUBJECT --text
                TEXT [--html HTML] [--tls] [--no-tls] [--debuglevel DEBUGLEVEL]
+               [--attachments ATTACHMENTS]
 
 Send email throw specified SMTP server.
 
@@ -28,11 +29,19 @@ optional arguments:
   --no-tls              Not use TLS (default: True)
   --debuglevel DEBUGLEVEL
                         Debug level (default: 0)
+  --attachments ATTACHMENTS
+                        One or few files to attach (default: None)
 ```
 
 Usage example:
 --------------
 
 ```
-python mail.py --host="debugmail.info" --login="john.doe@example.org" --password="very secret" --subject="Test subject" --text="Test message" --html="<h1>Wow, so electronic, very mail</h1>"
+python mail.py --host="debugmail.io" --login="john.doe@example.org" --password="very secret" --subject="Test subject" --text="Test message" --html="<h1>Wow, so electronic, very mail</h1>"
+```
+
+with attachments:
+
+```
+python mail.py --login="john.doe@gmail.com" --password="123123" --port="25" --host="debugmail.io" --text="Text content" --html="<h1>HTML content</h1>" --subject="test" --attachments="/tmp/attachment1.txt" --attachments="/tmp/attachment2.txt"
 ```
