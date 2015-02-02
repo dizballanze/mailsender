@@ -1,5 +1,5 @@
-Simple email sending cli-tool, for testing purpose
-==================================================
+Simple email sending cli-tool, for testing purposes
+===================================================
 
 Features:
 ---------
