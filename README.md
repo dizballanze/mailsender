@@ -1,6 +1,15 @@
 Simple email sending cli-tool, for testing purpose
 ==================================================
 
+Features:
+---------
+
+ -  HTML and/or TXT content.
+ -  TLS support.
+ -  Multiple attachments.
+ -  Flood - send same mail multiple times through one connection.
+
+
 Usage:
 ------
 
@@ -10,9 +19,9 @@ Usage:
 usage: mail.py [-h] [--host HOST] [--port PORT] --login LOGIN --password
                PASSWORD [--sender SENDER] [--to TO] --subject SUBJECT --text
                TEXT [--html HTML] [--tls] [--no-tls] [--debuglevel DEBUGLEVEL]
-               [--attachments ATTACHMENTS]
+               [--attachments ATTACHMENTS] [--flood FLOOD]
 
-Send email throw specified SMTP server.
+Send email through specified SMTP server.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -31,6 +40,8 @@ optional arguments:
                         Debug level (default: 0)
   --attachments ATTACHMENTS
                         One or few files to attach (default: None)
+  --flood FLOOD         Count of messages send (through one connection)
+                        (default: 1)
 ```
 
 Usage example:
