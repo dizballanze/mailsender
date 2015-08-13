@@ -13,6 +13,7 @@ Installation
 ------------
 
 ::
+
     pip install emailsender
 
 Usage:
