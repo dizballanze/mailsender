@@ -9,7 +9,8 @@ from email import Encoders
 
 
 def send_mail(host=None, port=None, login=None, password=None, sender=None,
-              to=None,subject=None, text=None, html=None, tls=None, debuglevel=2, attachments=None, flood=1):
+              to=None, reply_to=None, subject=None, text=None, html=None,
+              tls=None, debuglevel=2, attachments=None, flood=1):
     """ Send email routine """
 
     # Compose mail headers
@@ -17,6 +18,8 @@ def send_mail(host=None, port=None, login=None, password=None, sender=None,
     msg['Subject'] = subject
     msg['From'] = sender
     msg['To'] = to
+    if reply_to:
+        msg['Reply-To'] = reply_to
 
     # Compose mail body
     text_part = MIMEText(text, 'plain')
@@ -67,6 +70,7 @@ def main():
     parser.add_argument("--text", required=True, help="Email body (plain text)")
     parser.add_argument("--html", required=False, default="", help="Email body (html)")
     parser.add_argument('--tls', dest='tls', action='store_true', help="Use TLS if specified")
+    parser.add_argument("--reply-to", required=False, default=None, help="Reply-To field in email")
     parser.add_argument("--debuglevel", required=False, type=int, default=0, help="Debug level")
     parser.add_argument("--attachments", required=False, action='append', help="One or few files to attach")
     parser.add_argument("--flood", required=False, type=int, default=1, help="Count of messages send (through one connection)")
