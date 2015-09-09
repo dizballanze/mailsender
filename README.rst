@@ -44,6 +44,7 @@ Usage:
       --text TEXT           Email body (plain text) (default: None)
       --html HTML           Email body (html) (default: )
       --tls                 Use TLS if specified (default: True)
+      --reply-to REPLY_TO   Reply-To field in email (default: None)
       --debuglevel DEBUGLEVEL
                             Debug level (default: 0)
       --attachments ATTACHMENTS
