@@ -27,9 +27,8 @@ Usage:
 
     usage: emailsender [-h] [--host HOST] [--port PORT] --login LOGIN --password
                        PASSWORD [--sender SENDER] [--to TO] --subject SUBJECT
-                       --text TEXT [--html HTML] [--tls] [--no-tls]
-                       [--debuglevel DEBUGLEVEL] [--attachments ATTACHMENTS]
-                       [--flood FLOOD]
+                       --text TEXT [--html HTML] [--tls] [--debuglevel DEBUGLEVEL]
+                       [--attachments ATTACHMENTS] [--flood FLOOD]
 
     Send email through specified SMTP server.
 
@@ -44,8 +43,7 @@ Usage:
       --subject SUBJECT     Email subject (default: None)
       --text TEXT           Email body (plain text) (default: None)
       --html HTML           Email body (html) (default: )
-      --tls                 Use TLS (default: True)
-      --no-tls              Not use TLS (default: True)
+      --tls                 Use TLS if specified (default: True)
       --debuglevel DEBUGLEVEL
                             Debug level (default: 0)
       --attachments ATTACHMENTS
